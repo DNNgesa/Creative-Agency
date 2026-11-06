@@ -4,28 +4,23 @@ export default function Carousel({ products }) {
   const scrollContainerRef = useRef(null);
 
   useEffect(() => {
-    // If there are no products or the reference is empty, stop execution early
     if (products.length === 0 || !scrollContainerRef.current) return;
 
     const container = scrollContainerRef.current;
 
     const autoSlideTimer = setInterval(() => {
-      // Define individual card step calculation width matching our item card bounds below
       const cardStepWidth = 320; 
 
-      // If we reach the end of the catalog track row, rewind back to index 0 smoothly
       if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 20) {
         container.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
-        // Move horizontal layout rightward by exactly one card width step
         container.scrollBy({ left: cardStepWidth, behavior: 'smooth' });
       }
-    }, 3000); // ⏱️ TIMER CONSTRAINT: Shifts focus step every 3 seconds
+    }, 3000); 
 
     return () => clearInterval(autoSlideTimer);
   }, [products]);
 
-  // Manual Arrow Click Handlers
   const handleScrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: -320, behavior: 'smooth' });
@@ -47,7 +42,6 @@ export default function Carousel({ products }) {
       <div className="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
         <h3 className="fw-bold text-dark m-0">GALLERY</h3>
         
-        {/* Custom Navigation Indicator Arrows */}
         <div className="d-flex gap-2">
           <button 
             type="button" 
@@ -68,22 +62,13 @@ export default function Carousel({ products }) {
         </div>
       </div>
       
-      {/* 
-        CRITICAL FIX: 
-        1. 'd-flex flex-row flex-nowrap' forces items onto a single left-to-right line timeline.
-        2. 'overflow-hidden' completely hides the native browser scrollbars.
-      */}
       <div 
         ref={scrollContainerRef}
         className="d-flex flex-row flex-nowrap overflow-hidden g-4 pb-3" 
         style={{ scrollSnapType: 'x mandatory', gap: '20px' }}
       >
         {products.map((item) => (
-          /* 
-            CRITICAL FIX: 
-            'flex: 0 0 auto' locks card widths into an explicit 300px box width constraint,
-            preventing Bootstrap from stretching them or wrapping them vertically!
-          */
+
           <div 
             key={item.id} 
             style={{ flex: '0 0 300px', scrollSnapAlign: 'start' }}

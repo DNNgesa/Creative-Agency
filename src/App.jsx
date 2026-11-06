@@ -50,18 +50,12 @@ export default function App() {
 
   return (
     <div className="agency-app min-vh-100 bg-light" style={{ paddingBottom: '80px' }}>
-      <NavBar 
-        onToggleAdmin={() => setIsAdminOpen(!isAdminOpen)} 
-        searchInput={searchQuery}
-        onSearchChange={setSearchQuery}
-      />
       
-      <Hero />
-
+      
       {isAdminOpen && (
         <main className="container my-4">
           <section className="bg-white border rounded p-4 mx-auto shadow-sm" style={{ maxWidth: '600px' }}>
-            <h4 className="fw-bold mb-3 text-dark">Add Art Piece</h4>
+            <h4 className="fw-bold mb-3 text-dark"></h4>
             <form onSubmit={handleAddArtPiece} className="d-flex flex-column gap-3">
               <input type="text" className="form-control" placeholder="Art Piece Title..." value={title} onChange={(e) => setTitle(e.target.value)} />
               <input type="text" className="form-control" placeholder="Artist Name..." value={artist} onChange={(e) => setArtist(e.target.value)} />
@@ -73,6 +67,14 @@ export default function App() {
           </section>
         </main>
       )}
+
+      <NavBar 
+        onToggleAdmin={() => setIsAdminOpen(!isAdminOpen)} 
+        searchInput={searchQuery}
+        onSearchChange={setSearchQuery}
+      />
+
+      <Hero products={products} />
 
       <Carousel products={filteredProducts} />
 
