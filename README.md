@@ -2,6 +2,23 @@
 
 This application acts as an interactive fine art catalog with an automated infinite image slider gallery loop, dynamic search filters, and an administrative curation desk tool.
 
+# Interface Previews
+
+<table width="100%">
+  <tr>
+    <td width="50%" align="center">
+      <strong>Hero Showcase</strong><br />
+      <img src="src/assets/Hero.png" alt="Hero Showcase Preview" width="100%" />
+    </td>
+    <td width="50%" align="center">
+      <strong>Exhibition Carousel</strong><br />
+      <img src="src/assets/Carousel.png" alt="Carousel Exhibition Preview" width="100%" />
+    </td>
+  </tr>
+</table>
+
+
+
 ## 1. Setup and Usage Instructions
 
 Follow these chronological terminal commands to clone the project, manage package setups, and run the developer interface sandbox locally on your machine.
@@ -44,6 +61,8 @@ Ensure you have [Node.js] and npm installed on your local computer before runnin
 * **`src/components/Hero.jsx`**: An index-reactive presentation splash banner. It is programmed using index mathematics (`products[products.length - 1]`) to track state array sizes, automatically applying the latest uploaded painting as a dark backdrop overlay behind main text calls.
 * **`src/components/Carousel.jsx`**: A modular infinite horizontal sliding gallery shelf. It relies on clean, native flex row wrappers (`flex-nowrap`, `overflow-hidden`) combined with a React `useRef` hook and `setInterval` clocks to translate display cards smoothly across viewports without relying on external plugins.
 * **`src/components/Footer.jsx`**: A structural fixed footer segment pinning legal declarations and automatic copyright calendar year generators down at the bottom of the device viewport grid.
+* **`src/components/Timer.jsx`**: Features a background lifecycle component that returns `null` to run silently without rendering visual UI elements. It uses an optimized 5-second interval loop to cross-reference the client's native system clock against pre-set opening parameters (09:00 - 17:00), automatically syncing state properties to swap the navigation header badge layout dynamically between **● Gallery Open** and **○ Gallery Closed**.
+
 
 ### Key Interactive Patterns
 * **Unidirectional Data Flow**: Application state variables originate entirely inside the parent ledger wrapper file (`App.jsx`), cascading down into children components as standard immutable data props or function callback listeners (`onToggleAdmin`).
@@ -54,8 +73,6 @@ Ensure you have [Node.js] and npm installed on your local computer before runnin
 
 ## 3. Known Project Constraints & Architectural Limitations
 
-Because this project is designed purely as a frontend application running within the user's sandbox web browser profile, it contains a few intentional constraints that serve as learning milestones for students:
-
-### 1. The Client-Side Storage Device Silo
+### The Client-Side Storage Device Silo
 * **The Limitation**: Art pieces created by users are written directly onto *their individual computer's browser cache drive profile*.
 * **The Result**: If a user creates an art card on their machine, it will survive page reloads and browser tab restarts, but **it will not be visible to a different user** loading the website from another computer.
