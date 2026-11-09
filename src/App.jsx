@@ -5,12 +5,15 @@ import NavBar from './components/NavBar'
 import Hero from './components/Hero'
 import Carousel from './components/Carousel'
 import Footer from './components/Footer'
-import { initialProducts } from './components/AgencyData'
+import Timer from './components/Timer' 
+
+import { getSavedGallery } from './components/AgencyData'
 
 export default function App() {
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState(getSavedGallery);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isGalleryOpen, setIsGalleryOpen] = useState(true);
 
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
@@ -26,13 +29,12 @@ export default function App() {
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem("galleria_exhibit_store", JSON.stringify(products));
+  }, [products]); 
+
   const handleAddArtPiece = (e) => {
     e.preventDefault();
-    if (!title || !artist || !year) {
-      alert("Please enter a Title, Artist Name, and Year!");
-      return;
-    }
-
     const brandNewArtPiece = {
       id: Date.now(),
       title: title,
@@ -43,12 +45,7 @@ export default function App() {
     };
 
     setProducts([...products, brandNewArtPiece]);
-
-    setTitle("");
-    setArtist("");
-    setYear("");
-    setDesc("");
-    setImage("");
+    setTitle(""); setArtist(""); setYear(""); setDesc(""); setImage("");
   };
 
   const filteredProducts = products.filter(product => 
@@ -62,7 +59,7 @@ export default function App() {
       {isAdminOpen && (
         <main className="container my-4">
           <section className="bg-white border rounded p-4 mx-auto shadow-sm" style={{ maxWidth: '600px' }}>
-            <h4 className="fw-bold mb-3 text-dark">Curator Panel</h4>
+            <h4 className="fw-bold mb-3 text-dark">Curator Desk</h4>
             <form onSubmit={handleAddArtPiece} className="d-flex flex-column gap-3">
               <input type="text" className="form-control" placeholder="Art Piece Title..." value={title} onChange={(e) => setTitle(e.target.value)} required />
               <input type="text" className="form-control" placeholder="Artist Name..." value={artist} onChange={(e) => setArtist(e.target.value)} required />
@@ -79,11 +76,14 @@ export default function App() {
         onToggleAdmin={() => setIsAdminOpen(!isAdminOpen)} 
         searchInput={searchQuery}
         onSearchChange={setSearchQuery}
+        isGalleryOpen={isGalleryOpen} 
       />
 
       <Hero products={products} onViewExhibition={scrollToGallery} />
 
       <Carousel ref={galleryRef} products={filteredProducts} />
+
+      <Timer onStatusChange={setIsGalleryOpen} />
 
       <Footer />
     </div>

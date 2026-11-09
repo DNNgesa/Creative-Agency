@@ -34,7 +34,6 @@ export const initialProducts = [
 ];
 
 
-// Loops through the localStorage to retrieve any previously saved gallery data, or returns the initialProducts if none are found.
 export const getSavedGallery = () => {
   const cachedData = localStorage.getItem("galleria_exhibit_store");
   return cachedData ? JSON.parse(cachedData) : initialProducts;

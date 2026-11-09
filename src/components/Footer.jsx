@@ -11,6 +11,7 @@ export default function Footer() {
           </small>
         </div>
 
+        {/* Bootstrap Font Icons */}
         <div className="d-flex gap-3 align-items-center fs-5">
           <a href="https://github.com/DNNgesa/Creative-Agency" target="_blank" rel="noreferrer" className="text-white-50 text-decoration-none hover-link" title="GitHub">
             <i className="bi bi-github"></i>
