@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 
 import NavBar from './components/NavBar'
 import Hero from './components/Hero'
 import Carousel from './components/Carousel'
 import Footer from './components/Footer'
-import { initialProducts } from './components/AgencyData'
+
+import { getSavedGallery } from './components/AgencyData'
 
 export default function App() {
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState(getSavedGallery);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -18,20 +19,19 @@ export default function App() {
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState("");
 
+  useEffect(() => {
+    localStorage.setItem("galleria_exhibit_store", JSON.stringify(products));
+  }, [products]); 
+
   const handleAddArtPiece = (e) => {
     e.preventDefault();
-    if (!title || !artist || !year) {
-      alert("Please enter a Title, Artist Name, and Year!");
-      return;
-    }
-
     const brandNewArtPiece = {
       id: Date.now(),
       title: title,
       artist: artist,
       year: parseInt(year),
       description: desc || "No description provided for this catalog piece.",
-      image: image || "https://unsplash.com"
+      image: image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR1YY_rNJRJZxL7zDFApEmC9IuLLD-SG2qK9tFbUnMAW6u8UWmFrG1P2DI&s=10"
     };
 
     setProducts([...products, brandNewArtPiece]);
@@ -82,3 +82,4 @@ export default function App() {
     </div>
   )
 }
+

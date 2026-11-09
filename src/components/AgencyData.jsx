@@ -13,7 +13,7 @@ export const initialProducts = [
     image: "https://static.wixstatic.com/media/333f9f_4bbf8437a3f7427d9032ab8fc14257c9~mv2.jpg/v1/fill/w_315,h_429,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/file.jpg",
     artist: "Paul Oz",
     year: 2026,
-    description: "Lewis celebrating his first race win for Ferrari, el primo! The seven-time World Champion romped to victory at the Circuit de Barcelona-Catalunya by nearly 20 seconds."
+    description: "Sir Lewis Hamilton celebrating his first race win for Ferrari, el primo! The seven-time World Champion romped to victory at the Circuit de Barcelona-Catalunya by nearly 20 seconds."
   },
   {
     id: 103,
@@ -34,3 +34,8 @@ export const initialProducts = [
 ];
 
 
+// Loops through the localStorage to retrieve any previously saved gallery data, or returns the initialProducts if none are found.
+export const getSavedGallery = () => {
+  const cachedData = localStorage.getItem("galleria_exhibit_store");
+  return cachedData ? JSON.parse(cachedData) : initialProducts;
+};
