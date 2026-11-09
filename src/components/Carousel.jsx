@@ -1,13 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, forwardRef } from 'react';
 
-export default function Carousel({ products }) {
+const Carousel = forwardRef(({ products }, ref) => {
   const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     if (products.length === 0 || !scrollContainerRef.current) return;
 
     const container = scrollContainerRef.current;
-
     const autoSlideTimer = setInterval(() => {
       const cardStepWidth = 320; 
 
@@ -38,7 +37,7 @@ export default function Carousel({ products }) {
   }
 
   return (
-    <div className="container my-5" style={{ marginBottom: '120px' }}>
+    <div ref={ref} className="container my-5" style={{ marginBottom: '120px', scrollMarginTop: '100px' }}>
       <div className="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
         <h3 className="fw-bold text-dark m-0">GALLERY</h3>
         
@@ -68,11 +67,7 @@ export default function Carousel({ products }) {
         style={{ scrollSnapType: 'x mandatory', gap: '20px' }}
       >
         {products.map((item) => (
-
-          <div 
-            key={item.id} 
-            style={{ flex: '0 0 300px', scrollSnapAlign: 'start' }}
-          >
+          <div key={item.id} style={{ flex: '0 0 300px', scrollSnapAlign: 'start' }} >
             <div className="card h-100 shadow-sm border rounded-3 overflow-hidden bg-white">
               <img src={item.image} className="card-img-top" alt={item.title} style={{ height: '220px', objectFit: 'cover' }} />
               <div className="card-body d-flex flex-column justify-content-between p-3">
@@ -91,4 +86,6 @@ export default function Carousel({ products }) {
       </div>
     </div>
   );
-}
+});
+
+export default Carousel;

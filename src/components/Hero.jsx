@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function Hero({ products }) {
+export default function Hero({ products, onViewExhibition }) { 
   if (!products || products.length === 0) {
     return (
       <div className="bg-dark text-white text-center d-flex align-items-center justify-content-center" style={{ minHeight: '50vh', paddingTop: '80px' }}>
-        <h1 className="h3 text-muted">No exhibition assets currently active.</h1>
+        <h1 className="h3 text-muted">No exhibition currently active.</h1>
       </div>
     );
   }
@@ -37,9 +37,13 @@ export default function Hero({ products }) {
             {latestMasterpiece.description}
           </p>
           
-          <a href="#gallery" className="btn btn-outline-light px-4 py-2 fw-bold text-uppercase tracking-wide rounded-0">
+          <button 
+            type="button" 
+            className="btn btn-outline-light px-4 py-2 fw-bold text-uppercase tracking-wide rounded-0"
+            onClick={onViewExhibition}
+          >
             View Full Exhibition
-          </a>
+          </button>
 
         </div>
       </div>
