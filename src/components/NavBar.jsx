@@ -7,7 +7,7 @@ export default function NavBar({ onToggleAdmin, searchInput, onSearchChange, isG
         
         <div className="d-flex align-items-center gap-3" style={{ flex: '1', justifyContent: 'flex-start' }}>
           <button className="btn btn-outline-light btn-sm fw-bold" onClick={onToggleAdmin}>
-            Add Product
+            Add New Art Piece
           </button>
           <span className={`small d-none d-lg-inline-block fw-semibold font-monospace ${isGalleryOpen ? 'text-success animate-pulse' : 'text-danger'}`}>
             {isGalleryOpen ? '● Gallery Open' : '○ Gallery Closed'}
