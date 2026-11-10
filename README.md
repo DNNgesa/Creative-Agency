@@ -17,8 +17,6 @@ This application acts as an interactive fine art catalog with an automated infin
   </tr>
 </table>
 
-
-
 ## 1. Setup and Usage Instructions
 
 Follow these chronological terminal commands to clone the project, manage package setups, and run the developer interface sandbox locally on your machine.
@@ -48,7 +46,7 @@ Ensure you have [Node.js] and npm installed on your local computer before runnin
    *Terminal output will provide a link path (usually `http://localhost:5173/`). Copy and open this address link inside your browser.*
 
 4. **Verify Application Controls**
-   * Use the **Add Product** toggle button located on the top-left side of your fixed navbar to reveal or slide away the Curator Panel form interface.
+   * Use the **Add New Art Piece** toggle button located on the top-left side of your fixed navbar to reveal or slide away the Curator Panel form interface.
    * Type text keywords into the search box on the top-right navbar layer to filter artwork cards instantly by piece title or artist name.
 
 ---
@@ -63,7 +61,6 @@ Ensure you have [Node.js] and npm installed on your local computer before runnin
 * **`src/components/Footer.jsx`**: A structural fixed footer segment pinning legal declarations and automatic copyright calendar year generators down at the bottom of the device viewport grid.
 * **`src/components/Timer.jsx`**: Features a background lifecycle component that returns `null` to run silently without rendering visual UI elements. It uses an optimized 5-second interval loop to cross-reference the client's native system clock against pre-set opening parameters (09:00 - 17:00), automatically syncing state properties to swap the navigation header badge layout dynamically between **● Gallery Open** and **○ Gallery Closed**.
 
-
 ### Key Interactive Patterns
 * **Unidirectional Data Flow**: Application state variables originate entirely inside the parent ledger wrapper file (`App.jsx`), cascading down into children components as standard immutable data props or function callback listeners (`onToggleAdmin`).
 * **Case-Insensitive Double Search Filtering**: The text query engine maps lowercase matching conversions (`.toLowerCase()`) across titles and artist parameters simultaneously, re-rendering elements in real-time.
@@ -71,7 +68,16 @@ Ensure you have [Node.js] and npm installed on your local computer before runnin
 
 ---
 
-## 3. Known Project Constraints & Architectural Limitations
+## 3. Automated Unit Testing Workflow
+
+This project utilizes **Vitest** paired with **React Testing Library** and **jsdom** to simulate user gestures, mock browser states, and validate core component mount lifecycles within an isolated headless environment.
+
+Run this direct terminal script command at the root directory of your workspace to engage the automated watcher testing deck panel:
+```bash
+npm run test
+```
+
+## 4. Known Project Constraints & Architectural Limitations
 
 ### The Client-Side Storage Device Silo
 * **The Limitation**: Art pieces created by users are written directly onto *their individual computer's browser cache drive profile*.
